@@ -40,5 +40,9 @@ class TestDdict(unittest.TestCase):
         self.assertDictEqual(ddict_d.d1, self.d['d1'])
         self.assertDictEqual(ddict_d.d1.d2, self.d['d1']['d2'])
 
+    def test_missing_key(self):
+        ddict_d = Ddict(self.d)
+        self.assertTrue(ddict_d.d1.d4 is None)
+
 if __name__ == '__main__':
     unittest.main()
