@@ -8,7 +8,7 @@ class Ddict(dict):
             if isinstance(arg, dict):
                 for t in arg.items():
                     self[t[0]] = (
-                        Ddict(t[1]) if isinstance(t[1], dict)else t[1])
+                        Ddict(t[1]) if isinstance(t[1], dict) else t[1])
         if kwargs:
             for t in kwargs.items():
                 self[t[0]] = Ddict(t[1]) if isinstance(t[1], dict) else t[1]
