@@ -1,17 +1,17 @@
 # coding: utf-8
 
-
 class Ddict(dict):
     def __init__(self, *args, **kwargs):
         super(Ddict, self).__init__(*args, **kwargs)
         for arg in args:
             if isinstance(arg, dict):
-                for t in arg.items():
-                    self[t[0]] = (
-                        Ddict(t[1]) if isinstance(t[1], dict) else t[1])
+                self.update(arg)
         if kwargs:
-            for t in kwargs.items():
-                self[t[0]] = Ddict(t[1]) if isinstance(t[1], dict) else t[1]
+            self.update(kwargs)
+
+    def update(self, d):
+        for k, v in d.items():
+            self[k] = Ddict(v) if isinstance(v, dict) else v
 
     def __getitem__(self, k):
         try:
