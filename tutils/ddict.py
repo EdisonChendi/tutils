@@ -6,12 +6,14 @@ class Ddict(dict):
         super(Ddict, self).__init__(*args, **kwargs)
         for arg in args:
             if isinstance(arg, dict):
-                for t in arg.items():
-                    self[t[0]] = (
-                        Ddict(t[1]) if isinstance(t[1], dict) else t[1])
+                self.update(arg)
         if kwargs:
-            for t in kwargs.items():
-                self[t[0]] = Ddict(t[1]) if isinstance(t[1], dict) else t[1]
+            self.update(kwargs)
+
+    def update(self, d=None, **kwargs):
+        kwargs.update(d)
+        for k, v in kwargs.items():
+            self[k] = Ddict(v) if isinstance(v, dict) else v
 
     def __getitem__(self, k):
         try:

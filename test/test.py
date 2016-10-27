@@ -44,5 +44,12 @@ class TestDdict(unittest.TestCase):
         ddict_d = Ddict(self.d)
         self.assertTrue(ddict_d.d1.d4 is None)
 
+    def test_muli_update(self):
+        d = Ddict({"a": 1})
+        d.update({"a": 2}, b=3, c=4)
+        self.assertEqual(d.a, 2)
+        self.assertEqual(d.b, 3)
+        self.assertEqual(d.c, 4)
+
 if __name__ == '__main__':
     unittest.main()
