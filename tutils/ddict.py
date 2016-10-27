@@ -10,9 +10,10 @@ class Ddict(dict):
             self.update(kwargs)
 
     def update(self, other=None, **kwargs):
-        for d in [other, kwargs]:
-            for k, v in d.items():
-                self[k] = Ddict(v) if isinstance(v, dict) else v
+        if other:
+            kwargs.update(other)
+        for k, v in kwargs.items():
+            self[k] = Ddict(v) if isinstance(v, dict) else v
 
     def __getitem__(self, k):
         try:

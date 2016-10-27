@@ -51,5 +51,14 @@ class TestDdict(unittest.TestCase):
         self.assertEqual(d.b, 3)
         self.assertEqual(d.c, 4)
 
+    def test_update(self):
+        d = Ddict()
+        try:
+            d.update(1, a=1)
+        except TypeError as e:
+            self.assertIn("is not iterable", str(e))
+        d.update(a=1, b=2)
+        self.assertDictEqual(d, dict(a=1, b=2))
+
 if __name__ == '__main__':
     unittest.main()
